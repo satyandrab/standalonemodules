@@ -7,7 +7,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^beta/', include('standalonemodules.beta.urls')),
-    url(r'^registration/', include('registration.urls')),
     # url(r'^$', 'standalonemodules.views.home', name='home'),
     # url(r'^standalonemodules/', include('standalonemodules.foo.urls')),
 

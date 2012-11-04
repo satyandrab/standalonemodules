@@ -104,8 +104,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'standalonemodules.urls'
 
 TEMPLATE_DIRS = (
-    'C:/workspace/standalonemodules/standalonemodules/beta',
-    'C:/workspace/standalonemodules/standalonemodules/registration/templates'
+    'C:/workspace/standalonemodules/standalonemodules/beta'
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -123,7 +122,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
      'django.contrib.admindocs',
     'standalonemodules.beta',
-    'standalonemodules.registration',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

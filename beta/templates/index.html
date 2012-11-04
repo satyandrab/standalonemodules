@@ -13,7 +13,6 @@
       var form = jQuery("#contactform");
       form.submit(function(e) {
           jQuery("#sendbutton").attr('disabled', true)
-          jQuery("#sendwrapper").prepend('<span>Sending message, please wait... </span>')
           jQuery("#ajaxwrapper").load(
               form.attr('action') + ' #ajaxwrapper',
               form.serializeArray(),
@@ -28,16 +27,19 @@
   </script>
 </head>
 <body>
+
   <form action="{% url index %}" method="post" id="contactform">
     <div id="ajaxwrapper">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    {{ form.as_p }}
-    <p id="sendwrapper"><input type="submit" value="Send" id="sendbutton"/></p>
-    
-    <div>
-  		{{ message }}
-  	</div>
+    {% if form %}
+    	{% csrf_token %}
+    	{{ form.non_field_errors }}
+    	{{ form.as_p }}
+    	<p id="sendwrapper"><input type="submit" value="Send" id="sendbutton"/></p>
+    {% endif %}
+    	{{ message }}
+    	{% if url_hash %}
+  			<a href = '{{ url_hash }}'>{{ url_hash }}</a>
+	  	{% endif %}
     </div>
   </form>
 </body>

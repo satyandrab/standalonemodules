@@ -7,6 +7,7 @@ from django.conf.urls.defaults import patterns, include, url
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'beta.views.index', name='index'),
+    url(r'^(?P<url_hash>[a-zA-z0-9]{32})/$', 'beta.views.visiturl', name='visiturl'),
     # url(r'^$', 'standalonemodules.views.home', name='home'),
     # url(r'^standalonemodules/', include('standalonemodules.foo.urls')),
 
