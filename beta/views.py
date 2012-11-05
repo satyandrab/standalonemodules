@@ -1,7 +1,7 @@
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from models import BetaRegistration
+from models import BetaRegistration, IPLog
 from binascii import hexlify
 from beta.forms import EmailForm
 import os
@@ -47,11 +47,25 @@ def index(request):
 
 def visiturl(request, url_hash):
     message = ''
+#    print set_cookie(request, )
     url_hash_query = BetaRegistration.objects.get(url_hash = url_hash)
     if url_hash_query:
-        url_hash_query.click_pnts = url_hash_query.click_pnts + 1
-        url_hash_query.save()
-        message = "Thanks for visiting URL."
+        ip_client = request.META['REMOTE_ADDR']
+        try:
+            ip_log_obj = IPLog(ip = ip_client)
+            ip_log_obj.save()
+        except:
+            pass
+        ip_for_click = IPLog.objects.get(ip = ip_client)
+        
+        #print url_hash_query.click_ips.all()
+        if ip_for_click in url_hash_query.click_ips.all():
+            message = 'This IP already visited this link, so counter not increased.'
+        else:
+            url_hash_query.click_pnts = url_hash_query.click_pnts + 1
+            url_hash_query.click_ips.add(ip_for_click)
+            url_hash_query.save()
+            message = "Thanks for visiting URL."
     else:
         message = "URL hash not available in our database."
 
